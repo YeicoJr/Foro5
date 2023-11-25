@@ -1,0 +1,53 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Foro5 {
+
+    public static void main(String[] args) {
+        Scanner read = new Scanner(System.in);
+
+        try {
+            System.out.print("Ingrese la cantidad de notas (entre 2 y 20): ");
+            int size = read.nextInt();
+            
+
+          //NUMERO DE NOTAS DEBE ESTAR ENTRE 0 Y 20
+            if (size < 2 || size > 20) {
+                throw new IllegalArgumentException("La cantidad de notas debe estar entre 2 y 20.");
+            }
+
+            double[] grade = new double[size];
+
+            for (int i = 0; i < size; i++) {
+                // INGRESAR LAS NOTA
+                double nota;
+                do {
+                    System.out.print("Ingrese la nota en la posición " + (i + 1) + " (entre 0 y 5): ");
+                    nota = read.nextDouble();
+
+                    // LA NOTA DEBE SER DE 0 A 5
+                    if (nota < 0 || nota > 5) {
+                        System.out.println("La nota debe ser de 0 a 5. Verificar .");
+                    }
+                } while (nota < 0 || nota > 5);
+
+                grade[i] = nota;
+            }
+
+            double avg = 0;
+
+            for (double g : grade) {
+                avg += g;
+            }
+
+            System.out.println("El promedio del estudiante es: " + avg / size);
+
+        } catch (InputMismatchException uniminuto) {
+            System.out.println("solo puede ingresar numero");
+        } catch (IllegalArgumentException uniminuto) {
+            System.out.println("Error: " + uniminuto.getMessage());
+        } finally {
+            read.close(); 
+        }
+    }
+}
